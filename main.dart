@@ -370,6 +370,7 @@ class Terminal {
 
 //-Void Menu
 void menu() {
+  print('You can cancel and return to the menu by entering (0) in all steps.');
   print(
       '1.Create Bus, 2.Create Trip, 3.Display Trips, 4.Book Ticket, 5.Buy Ticket, 6.Cancel Ticket, 7.Trip Report, 8.Exit');
 }
