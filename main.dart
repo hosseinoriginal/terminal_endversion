@@ -26,7 +26,7 @@ class Terminal {
   List<Bus> buses = [];
   List<Trip> trips = [];
 
-  int income = 0;
+  double income = 0;
   int cancelReservation = 0;
   int cancelBuy = 0;
   int emptyChair = 0;
@@ -316,10 +316,22 @@ class Terminal {
         return;
       }
       int seatIndex = chairNum - 1;
-
-      if (bus.chair[seatIndex] == 'rr' || bus.chair[seatIndex] == 'bb') {
+      if ((trips[index].bus.chair[seatIndex]) == 'rr') {
+        print(
+            '${(trips[index].price) - (((trips[index].price) * 20) / 100)} will be returned to you.!');
+        cancelReservation++;
+        income += ((((trips[index].price) * 30) / 100) * 20 / 100);
         bus.chair[seatIndex] = seatNumber;
         print('The ticket was successfully cancelled. ✔');
+      } else if ((trips[index].bus.chair[seatIndex]) == 'bb') {
+        print(
+            '${(trips[index].price) - (((trips[index].price) * 10) / 100)} will be returned to you.!');
+        cancelBuy++;
+        income += (((trips[index].price) * 10) / 100);
+        bus.chair[seatIndex] = seatNumber;
+        print('The ticket was successfully cancelled. ✔');
+        print('$cancelBuy');
+        print('$income');
       } else {
         print('This seat was not previously reserved or purchased.');
       }
