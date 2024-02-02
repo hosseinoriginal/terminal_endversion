@@ -318,14 +318,14 @@ class Terminal {
       int seatIndex = chairNum - 1;
       if ((trips[index].bus.chair[seatIndex]) == 'rr') {
         print(
-            '${(trips[index].price) - (((trips[index].price) * 20) / 100)} will be returned to you.!');
+            '${(trips[index].price) - (((trips[index].price) * 20) / 100)} will be returned.!');
         cancelReservation++;
         income += ((((trips[index].price) * 30) / 100) * 20 / 100);
         bus.chair[seatIndex] = seatNumber;
         print('The ticket was successfully cancelled. ✔');
       } else if ((trips[index].bus.chair[seatIndex]) == 'bb') {
         print(
-            '${(trips[index].price) - (((trips[index].price) * 10) / 100)} will be returned to you.!');
+            '${(trips[index].price) - (((trips[index].price) * 10) / 100)} will be returned.!');
         cancelBuy++;
         income += (((trips[index].price) * 10) / 100);
         bus.chair[seatIndex] = seatNumber;
@@ -370,10 +370,17 @@ class Terminal {
       }
     }
 
+    int? total;
+    if (trips[index].bus.chair.length == 44) {
+      total = (trips[index].price + (44 - emptyChair) * trips[index].price);
+    } else if (trips[index].bus.chair.length == 30) {
+      total = trips[index].price + (30 - emptyChair) * trips[index].price;
+    }
+
     print('Trip Report:');
     print('Trip: ${trips[index].origin} to ${trips[index].destination}');
     print('-----------------------------------------');
-    print('Income: $income T');
+    print('Income: $total T');
     print('Empty Chairs: $emptyChair');
     print('Canceled Reservations: $cancelReservation');
     print('Canceled Buys: $cancelBuy');
